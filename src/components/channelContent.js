@@ -142,7 +142,7 @@ function ChannelContent(props) {
         setIsUser(false);
       }
     });
-  },[userId])
+  },[channelId])
 
 
   useEffect(()=>{
@@ -151,7 +151,15 @@ function ChannelContent(props) {
       if(snapshot.val()){
         setVideos(snapshot.val());
         const val=Object.keys(snapshot.val()).length;
-        setHeight((val/4)*400 + (2*window.screen.height*35)/100);
+        setHeight(Math.ceil(val/4)*300 + (2*window.screen.height*35)/100);
+        setLoading((prevState) => ({
+          ...prevState,
+          ["videos"]: true,
+        }));
+      }
+      else{
+        setVideos({});
+        setHeight((2*window.screen.height*35)/100);
         setLoading((prevState) => ({
           ...prevState,
           ["videos"]: true,
@@ -159,7 +167,7 @@ function ChannelContent(props) {
       }
     })
     
-  },[videos]);
+  },[channelId]);
 
   useEffect(() => {
     const userseRef=ref(db,`users`);
@@ -173,10 +181,10 @@ function ChannelContent(props) {
             }));
         }
     })
-  },[allUsers])
+  },[channelId])
 
   const channelSubscribed = () =>{
-    if(!isUser || !loading.users || !loading.videos)return false;
+    if(!loading.users)return false;
     const allSubscribers=Object.values((allUsers[channelId].subscribers) ? allUsers[channelId].subscribers : {});
     if(!allSubscribers.length)return false;
     const data = allSubscribers.filter((currentUser) => currentUser.subscriberId==userId);
@@ -257,7 +265,7 @@ function ChannelContent(props) {
                                     </Col>
                                     <Col sm={12} style={{display:"flex",justifyContent:"flex-start"}}>
                                         <Typography className={classes.viewsBigger}>
-                                            13k subscribers
+                                            {Object.keys((loading.users && allUsers[channelId].subscribers) ? allUsers[channelId].subscribers : {}).length} subscribers
                                         </Typography>
                                     </Col>
                                 </Row>
@@ -269,7 +277,7 @@ function ChannelContent(props) {
                             </Col>
                         </Row>
                     </Col>
-                  {Object.keys(videos).reverse().map((key,idx) => {
+                  {loading.videos && Object.keys(videos).reverse().map((key,idx) => {
                     return (
                       <Col sm={3} style={{padding:"10px"}}>
                         <Row>
@@ -292,7 +300,7 @@ function ChannelContent(props) {
                                     <Typography className={classes.channelName}>{(loading.users ) ? allUsers[videos[key].userId].userName : ""}</Typography>
                                   </Col>
                                   <Col sm={12} style={{display:"flex",alignItems:"flex-start"}}>
-                                    <Typography className={classes.views}>13k views - {handleTime(key)} ago</Typography>
+                                    <Typography className={classes.views}>{videos[key].viewCount} views - {handleTime(key)} ago</Typography>
                                   </Col>
                                 </Row>
                               </Col>

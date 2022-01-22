@@ -198,7 +198,7 @@ function Subscriptions(props) {
                                                 </Col>
                                                 <Col sm={12} style={{display:"flex",justifyContent:"flex-start"}}>
                                                     <Typography className={classes.viewsBigger}>
-                                                        13k subscribers
+                                                        {Object.keys(allUsers[userId].subscribers).length} subscribers
                                                     </Typography>
                                                 </Col>
                                             </Row>

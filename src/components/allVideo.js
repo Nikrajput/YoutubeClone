@@ -174,7 +174,7 @@ function Videos() {
                                     <Typography className={classes.channelName}>{(loading.users ) ? allUsers[videos[key].userId].userName : ""}</Typography>
                                   </Col>
                                   <Col sm={12} style={{display:"flex",alignItems:"flex-start"}}>
-                                    <Typography className={classes.views}>13k views - {handleTime(key)} ago</Typography>
+                                    <Typography className={classes.views}>{videos[key].viewCount} views - {handleTime(key)} ago</Typography>
                                   </Col>
                                 </Row>
                               </Col>

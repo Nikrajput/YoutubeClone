@@ -176,7 +176,7 @@ function Navbar() {
       <Col sm={8} style={{zIndex:"5",height:"0px"}}>
         <Row>
           <Col sm={12}>
-            <input onChange={(e)=>handleInputOption(e)} type="search" placeholder="Search" className={classes.searchBox}></input>
+            <input onChange={(e)=>handleInputOption(e)} type="search" placeholder="Search by title or category" className={classes.searchBox}></input>
           </Col>
           {Object.keys(options).map((key)=>{
             return (

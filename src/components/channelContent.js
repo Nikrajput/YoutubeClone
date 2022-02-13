@@ -283,7 +283,7 @@ function ChannelContent(props) {
                         <Row>
                           <Col sm={12}>
                             <Link to={`/watch/${key}`}>
-                              <ReactPlayer style={{background:"black",padding:"10px"}}  width={330} height={200} url={ videos[key].videoLink} />
+                              <ReactPlayer style={{background:"black",padding:"10px"}}  width={300} height={150} url={ videos[key].videoLink} />
                             </Link>
                           </Col>
                           <Col sm={12} style={{paddingTop:"10px"}}>

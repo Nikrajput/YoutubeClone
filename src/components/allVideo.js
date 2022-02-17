@@ -118,8 +118,8 @@ function Videos() {
     const currentTime = date.parse(date.format(new Date(), 'HH:mm:ss[ ]DD-MM-YYYY'),'HH:mm:ss[ ]DD-MM-YYYY');
     if(Math.floor(date.subtract(currentTime,videoDate).toDays())){
         const numberOfDays=Math.floor(date.subtract(currentTime,videoDate).toDays());
-        if(numberOfDays >=365)return `${numberOfDays/365} year`;
-        else if(numberOfDays>=30)return `${numberOfDays/30} month`;
+        if(numberOfDays >=365)return `${Math.floor(numberOfDays/365)} year`;
+        else if(numberOfDays>=30)return `${Math.floor(numberOfDays/30)} month`;
         else return `${numberOfDays} day`;
     }
     else if(Math.floor(date.subtract(currentTime,videoDate).toHours())){
